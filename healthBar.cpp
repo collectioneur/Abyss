@@ -24,3 +24,6 @@ void HealthBar::draw(RenderWindow& window) {
     window.draw(healthBarBackground);
     window.draw(healthBar);
 }
+Vector2f HealthBar::getSize() {
+    return Vector2f(maxWidth, 10.f);
+}
