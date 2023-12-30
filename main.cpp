@@ -24,7 +24,7 @@ using namespace std;
 int main() {
     RenderWindow window(VideoMode(1920, 1080), "Abyss");
     Font font;
-    if (!font.loadFromFile("/Users/egorharchenko/Desktop/gra/NightinTokyo.ttf")) {
+    if (!font.loadFromFile("fonts/NightinTokyo.ttf")) {
         cerr << "Error loading font" << endl;
         return -1;
     }
@@ -34,20 +34,25 @@ int main() {
     EndScreen endscreen(font, gameState);
     Statistics Statistics(font, gameState);
     Texture logoTexture, logoText, menuTexture, gameTexture, characterTexture, bulletTexture, monsterTexture_1, monsterTexture_2, monsterTexture_3, monsterTexture_4, gameLogoTexture, gunWindowTexture, katanaWindowTexture;
-    if (!logoTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/logo.png") ||
-        !logoText.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/textlogo.png") ||
-        !menuTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/menulogo.WEBP") ||
-        !gameTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gamebackground.png") ||
-        !characterTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/character2.png") ||
-        !bulletTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/bullet.png") ||
-        !monsterTexture_1.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monsterbasic.png") || !gameLogoTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gamelogo.png") ||
-        !monsterTexture_2.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monster_2.png") || !monsterTexture_3.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monster_3.png") || !monsterTexture_4.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monsterbasic.png") || !gunWindowTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gunPanel.png") || !katanaWindowTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/katanaPanel.png")) {
+    if (!logoTexture.loadFromFile("graphics/logo.png") ||
+        !logoText.loadFromFile("graphics/textlogo.png") ||
+        !menuTexture.loadFromFile("graphics/menulogo.WEBP") ||
+        !gameTexture.loadFromFile("graphics/gamebackground.png") ||
+        !characterTexture.loadFromFile("graphics/character2.png") ||
+        !bulletTexture.loadFromFile("graphics/bullet.png") ||
+        !monsterTexture_1.loadFromFile("graphics/monsterbasic.png") ||
+        !gameLogoTexture.loadFromFile("graphics/gamelogo.png") ||
+        !monsterTexture_2.loadFromFile("graphics/monster_2.png") ||
+        !monsterTexture_3.loadFromFile("graphics/monster_3.png") ||
+        !monsterTexture_4.loadFromFile("graphics/monsterbasic.png") ||
+        !gunWindowTexture.loadFromFile("graphics/gunPanel.png") ||
+        !katanaWindowTexture.loadFromFile("graphics/katanaPanel.png")) {
         cerr << "Error loading image" << endl;
         return -1;
     }
     vector<Monster> monsters;
     vector<characterInfo> allCharacters;
-    allCharacters.emplace_back(characterTexture , font, "Asuna", "Big booty hoe");
+    allCharacters.emplace_back(characterTexture , font, "Neko", "Big booty hoe");
     allCharacters.emplace_back(monsterTexture_1 , font, "Demonic man", "Fat asshole");
     allCharacters.emplace_back(monsterTexture_2 , font, "Demonic spider", "Fucking cringe");
     allCharacters.emplace_back(monsterTexture_3 , font, "Demonic sunflower", "What the fuck is that?");
