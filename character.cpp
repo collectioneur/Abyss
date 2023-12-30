@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
-
+#include <iostream>
 #include "character.hpp"
 
 using namespace sf;
-Character::Character(const Texture& texture, const sf::Vector2u& windowSize, const Texture& bulletTexture) : speed(200.f), health(500.f), life(1), healthBar(100.f) {
+Character::Character(const Texture& texture, const sf::Vector2u& windowSize, const Texture& bulletTexture) : speed(200.f), health(1000.f), life(1), healthBar(100.f) {
     sprite.setTexture(texture);
     this->bulletTexture = bulletTexture;
     FloatRect bounds = sprite.getLocalBounds();
@@ -13,6 +13,10 @@ Character::Character(const Texture& texture, const sf::Vector2u& windowSize, con
     destination = sprite.getPosition();
     isInvulnerable = false;
     invulnerabilityDuration = seconds(1.f);
+    allHealth = health;
+    for(int i = 0; i < 6; i++) {
+        killedDemonsbyType[i] = 0;
+    }
 }
 
 void Character::setDestination(const Vector2f& newDestination) {
@@ -76,8 +80,8 @@ void Character::drawBullets(sf::RenderWindow& window) {
 void Character::checkCollisionWithMonsters(vector<Monster>& monsters) {
     for (auto& monster : monsters) {
         if (sprite.getGlobalBounds().intersects(monster.getGlobalBounds()) && !isInvulnerable) {
-            health -= 100;
-            healthBar.setHealthPercent(health / 500);
+            health -= monster.getMonsterDamage();
+            healthBar.setHealthPercent(health / allHealth);
             makeInvulnerable();
             if (health < 0) life = 0;
         }
@@ -97,12 +101,16 @@ void Character::updateInvulnerability(const Time& deltaTime) {
 }
 void Character::reset(const Vector2u& windowSize) {
     sprite.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
-    health = 500;
+    health = allHealth;
     life = 1;
     healthBar.setHealthPercent(1.f);
     destination = sprite.getPosition();
+    killedDemons = 0;
     for (auto it = bullets.begin(); it != bullets.end();) {
         bullets.erase(it);
+    }
+    for(int i = 0; i < 6; i++) {
+        killedDemonsbyType[i] = 0;
     }
 }
 void Character::checkBulletMonsterCollisions(vector<Monster>& monsters) {
@@ -110,12 +118,15 @@ void Character::checkBulletMonsterCollisions(vector<Monster>& monsters) {
         bool bulletHit = false;
 
         for (auto monsterIt = monsters.begin(); monsterIt != monsters.end() && !bulletHit;) {
-            if (bulletIt->getGlobalBounds().intersects(monsterIt->getGlobalBounds())) {
+            if (bulletIt->getGlobalBounds().intersects(monsterIt->getGlobalBounds())&&monsterIt->checkIsVisible()) {
                 monsterIt->takeDamage(50);
                 bulletHit = true;
 
                 if (!monsterIt->isStillAlive()) {
+                    checkMonster_2(monsterIt);
+                    killedDemonsbyType[monsterIt -> getType()]++;
                     monsterIt = monsters.erase(monsterIt);
+                    killedDemons++;
                 } else {
                     ++monsterIt;
                 }
@@ -145,6 +156,9 @@ void Character::attackWithKatana(const Vector2f& cursorPosition, vector<Monster>
             if (attackArea.getGlobalBounds().intersects(monsterIt->getGlobalBounds())) {
                 monsterIt->takeDamage(attackDamage);
                 if (!monsterIt->isStillAlive()) {
+                    killedDemonsbyType[monsterIt -> getType()]++;
+                    killedDemons++;
+                    checkMonster_2(monsterIt);
                     monsterIt = monsters.erase(monsterIt);
                 } else {
                     ++monsterIt;
@@ -172,4 +186,38 @@ RectangleShape Character::getAttackArea(const Vector2f& cursorPosition) {
     attackArea.setRotation(angle + 90);
     attackArea.setFillColor(Color(255, 0, 0, 128));
     return attackArea;
+}
+FloatRect Character::getGlobalBounds() {
+    return sprite.getGlobalBounds();
+}
+int Character::howManyKilled() {
+ return killedDemons;
+}
+void Character::checkMonster_2(vector<Monster>::iterator monsterIt) {
+    if(monsterIt->getType() == 2) {
+        monster2_killed = 1;
+        coordMonster2 = monsterIt -> getPosition();
+        dirMonster2 = monsterIt -> getDirection();
+    }
+}
+bool Character::checkKilledMonster_2(){
+    return monster2_killed;
+}
+Vector2f Character::getPosKilledMonster_2(){
+    return coordMonster2;
+}
+void Character::resetKilledMonster_2(){
+    monster2_killed = 0;
+}
+Vector2f Character::getDirKilledMonster_2(){
+    return dirMonster2;
+}
+void Character::takeDamage(float damage) {
+    if(!isInvulnerable) health -= 50;
+    makeInvulnerable();
+    healthBar.setHealthPercent(health/allHealth);
+    if (health < 0) life = 0;
+}
+int Character::amountKilledDemonType(int demonType) {
+    return killedDemonsbyType[demonType];
 }
