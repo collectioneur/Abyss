@@ -3,5 +3,7 @@
 enum class GameState {
     MENU,
     GAME,
-    END_GAME
+    END_GAME,
+    STATISTICS,
+    CHARACTERS
 };
