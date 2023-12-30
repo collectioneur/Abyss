@@ -12,10 +12,12 @@ private:
     FloatRect spawnArea1;
     FloatRect spawnArea2;
     Texture monsterTexture;
+    Texture bulletTexture;
+    int monsterType;
 
     Vector2f getRandomSpawnPosition(const FloatRect& area);
 
 public:
-    MonsterSpawner(const Texture& texture, const FloatRect& area1, const FloatRect& area2);
-    void spawnMonster(vector<Monster>& monsters);
+    MonsterSpawner(const Texture& texture, const FloatRect& area1, const FloatRect& area2, const Texture& bulletTexture);
+    void spawnMonster(vector<Monster>& monsters,const int monsterType);
 };
