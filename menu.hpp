@@ -15,6 +15,7 @@ private:
     GameState& gameState;
 public:
     Menu(const Font& font, GameState& gameState);
-    void draw(RenderWindow& window);
+    void draw(RenderWindow& window, Texture& gameLogoTexture);
     void update(const Vector2f& mousePos, const Event& event);
+    Sprite createLogo(Texture gameLogoTexture);
 };
