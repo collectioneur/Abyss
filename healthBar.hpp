@@ -16,4 +16,5 @@ public:
     void setPosition(const Vector2f& position);
     void setHealthPercent(float percent);
     void draw(RenderWindow& window);
+    Vector2f getSize();
 };
