@@ -22,6 +22,11 @@ private:
     HealthBar healthBar;
     RectangleShape attackArea;
     bool katanaMode = 0;
+    int killedDemons = 0;
+    float allHealth = 0;
+    bool monster2_killed = 0;
+    Vector2f coordMonster2, dirMonster2;
+    int killedDemonsbyType[6];
 public:
     Character(const Texture& texture, const Vector2u& windowSize,  const Texture& bulletTexture);
     void setDestination(const Vector2f& newDestination);
@@ -40,4 +45,14 @@ public:
     void checkBulletMonsterCollisions(vector<Monster>& monsters);
     void attackWithKatana(const sf::Vector2f& cursorPosition, vector<Monster>& monsters);
     RectangleShape getAttackArea(const Vector2f& cursorPosition);
+    FloatRect getGlobalBounds();
+    int howManyKilled();
+    void checkMonster_2(vector<Monster>::iterator monsterIt);
+    bool checkKilledMonster_2();
+    Vector2f getPosKilledMonster_2();
+    Vector2f getDirKilledMonster_2();
+    void resetKilledMonster_2();
+    bool isStillAlive() const;
+    void takeDamage(float damage);
+    int amountKilledDemonType(int demonType);
 };
