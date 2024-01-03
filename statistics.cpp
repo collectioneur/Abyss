@@ -9,7 +9,7 @@ Statistics::Statistics(const Font& font, GameState& gameState) : gameState(gameS
     statisticsbuttons.emplace_back("Back", font, 50);
     StatisticsName.setFont(font);
     StatisticsName.setString("Statistics");
-    StatisticsName.setCharacterSize(100); // Розмір шрифту
+    StatisticsName.setCharacterSize(100); 
     StatisticsName.setFillColor(sf::Color::White);
     StatisticsName.setPosition(450, 50);
     float y = 600;
@@ -87,3 +87,28 @@ void Statistics::reset(){
     }
     statistics();
 }
+void Statistics::saveStats() {
+    ofstream file("Abyssstats.txt");
+    file << gamesPlayed << "\n";
+    file << bestTime << "\n";
+    file << mostDemonsKilled << "\n";
+    file << sumDemonsKilled << "\n";
+    for (int i = 0; i < 6; i++) {
+        file << sumDemonsKilledByType[i] << "\n";
+    }
+    file.close();
+}
+void Statistics::loadStats() {
+    ifstream file("Abyssstats.txt");
+    if (file.is_open()) {
+        file >> gamesPlayed;
+        file >> bestTime;
+        file >> mostDemonsKilled;
+        file >> sumDemonsKilled;
+        for (int i = 0; i < 6; i++) {
+            file >> sumDemonsKilledByType[i];
+        }
+    }
+    file.close();
+}
+
