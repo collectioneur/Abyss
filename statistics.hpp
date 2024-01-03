@@ -4,6 +4,7 @@
 #include "gamestate.hpp"
 #include "monster.hpp"
 #include <string>
+#include <fstream>
 using namespace std;
 using namespace sf;
 
@@ -25,4 +26,6 @@ public:
     void statistics();
     void setStats(float Time1, int DemonsKilled1, int* DemonsKilledByType1);
     void reset();
+    void saveStats();
+    void loadStats();
 };
