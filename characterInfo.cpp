@@ -3,6 +3,7 @@
 characterInfo::characterInfo(const Texture& texture, const Font& font, const string text_1, const string text_2) : infoButton("Get info", font, 50), backButton("Back", font, 50){
     sprite.setTexture(texture);
     sprite.setOrigin(sprite.getGlobalBounds().width/2, sprite.getGlobalBounds().height/2);
+    sprite.setScale(2.f, 2.f);
     sprite.setPosition(600, 300);
     characteristics.setString(text_1);
     information.setString(text_2);
