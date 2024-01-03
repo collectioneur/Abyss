@@ -5,5 +5,6 @@ enum class GameState {
     GAME,
     END_GAME,
     STATISTICS,
-    CHARACTERS
+    CHARACTERS,
+    PAUSE
 };
