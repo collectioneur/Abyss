@@ -34,6 +34,7 @@ int main() {
     Menu menu(font, gameState);
     EndScreen endscreen(font, gameState);
     Statistics Statistics(font, gameState);
+    Statistics.loadStats();
     Texture logoTexture, logoText, menuTexture, gameTexture, characterTexture, bulletTexture, monsterTexture_1, monsterTexture_2, monsterTexture_3, monsterTexture_4, gameLogoTexture, gunWindowTexture, katanaWindowTexture, characterTextureFlipped, monsterTexture_2Flipped;
     if (!logoTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/logo.png") ||
         !logoText.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/textlogo.png") ||
@@ -246,6 +247,7 @@ int main() {
                 }
                 if(!stopStatistics) {
                     Statistics.setStats(timeSpent, demonsKilled, demonsKilledByType);
+                    Statistics.saveStats();
                     stopStatistics = 1;
                 }
                 endscreen.statistics(demonsKilled, timeSpent);
@@ -268,6 +270,7 @@ int main() {
             else if(gameState == GameState::STATISTICS) {
                 window.draw(menuSprite);
                 Statistics.draw(window);
+                Statistics.saveStats();
             }
             else if(gameState == GameState::CHARACTERS) {
                 window.draw(menuSprite);
