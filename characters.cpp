@@ -3,7 +3,7 @@
 characters::characters(const Font& font, GameState& gameState) : leftButton("O", font, 100), rightButton("O", font, 100), exitButton("Exit", font, 50), gameState(gameState) {
     leftButton.setPosition(50, 300);
     rightButton.setPosition(1300, 300);
-    exitButton.setPosition(500,700);
+    exitButton.setPosition(600,700);
 }
 void characters::update(const Vector2f& mousePos, const Event& event) {
     leftButton.update(mousePos);
