@@ -4,24 +4,24 @@ characterInfo::characterInfo(const Texture& texture, const Font& font, const str
     sprite.setTexture(texture);
     sprite.setOrigin(sprite.getGlobalBounds().width/2, sprite.getGlobalBounds().height/2);
     sprite.setScale(2.f, 2.f);
-    sprite.setPosition(600, 300);
+    sprite.setPosition(700, 350);
     characteristics.setString(text_1);
     information.setString(text_2);
     information.setFont(font);
     characteristics.setFont(font);
     characteristics.setFillColor(Color::White);
     information.setFillColor(Color::White);
-    characteristics.setPosition(600 - sprite.getGlobalBounds().width/2, 300 + sprite.getGlobalBounds().height/2 + 40);
-    information.setOrigin(information.getGlobalBounds().width/2, information.getGlobalBounds().height/2);
+    characteristics.setPosition(700 - sprite.getGlobalBounds().width/2, 350 + sprite.getGlobalBounds().height/2 + 40);
+    //information.setOrigin(information.getGlobalBounds().width/2, information.getGlobalBounds().height/2);
     information.setPosition(500, 300);
     characteristics.setCharacterSize(60);
-    information.setCharacterSize(60);
+    information.setCharacterSize(30);
     //characteristics.setOutlineColor(Color::Black);
     //characteristics.setOutlineThickness(5.f);
     information.setOutlineColor(Color::Black);
     information.setOutlineThickness(5.f);
-    infoButton.setPosition(500, 50);
-    backButton.setPosition(500, 50);
+    infoButton.setPosition(600, 50);
+    backButton.setPosition(600, 50);
 }
 void characterInfo::draw(RenderWindow& window) {
     window.draw(sprite);
