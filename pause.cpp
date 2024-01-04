@@ -12,8 +12,8 @@ pause::pause(const Font& font, GameState& gameState) : gameState(gameState) {
     pauseText.setString("Pause");
     pauseText.setCharacterSize(100);
     pauseText.setFillColor(sf::Color::White);
-    pauseText.setPosition(450, 50);
-    float y = 500;
+    pauseText.setPosition(550, 50);
+    float y = 350;
     for (auto& button : pausebuttons) {
         button.setPosition(600, y);
         y += 70;
