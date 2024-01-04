@@ -18,7 +18,7 @@ Menu::Menu(const Font& font, GameState& gameState) : gameState(gameState) {
         button.setPosition(500, y);
         y += 80;
     }
-    playbuttons[0].setPosition(630, 150);
+    playbuttons[0].setPosition(650, 150);
    // playbuttons[1].setPosition(1000, 300);
     playbuttons[1].setPosition(650, 680);
 }
