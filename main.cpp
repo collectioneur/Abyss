@@ -41,7 +41,7 @@ int main() {
         !menuTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/menulogo.WEBP") ||
         !gameTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gamebackground.png") ||
         !characterTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/character3.png") ||
-        !bulletTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/bullet.png") ||
+        !bulletTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/bullet2.png") ||
         !monsterTexture_1.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monsterbasic.png") || !gameLogoTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gamelogo.png") ||
         !monsterTexture_2.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monster_2.png") || !monsterTexture_3.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monster_3.png") || !monsterTexture_4.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monsterbasic.png") || !gunWindowTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/gunPanel.png") || !katanaWindowTexture.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/katanaPanel.png") || !characterTextureFlipped.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/flippedCharacter.png") || !monsterTexture_2Flipped.loadFromFile("/Users/egorharchenko/Desktop/gra/graphics/monster_2Flipped.png")) {
         cerr << "Error loading image" << endl;
@@ -49,10 +49,10 @@ int main() {
     }
     vector<Monster> monsters;
     vector<characterInfo> allCharacters;
-    allCharacters.emplace_back(characterTextureFlipped , font, "Asuna", "Big booty hoe");
-    allCharacters.emplace_back(monsterTexture_1 , font, "Demonic man", "Fat asshole");
-    allCharacters.emplace_back(monsterTexture_2Flipped , font, "Demonic spider", "Fucking cringe");
-    allCharacters.emplace_back(monsterTexture_3 , font, "Demonic sunflower", "What the fuck is that?");
+    allCharacters.emplace_back(characterTextureFlipped , font, "Asuna", "In her childhood,\nAsuna lost her family due to demons\nthat invaded her village.\nFor twelve years now,\nshe has been storming the gates of hell\nto reach her offenders\nand is annihilating the demonic horde.");
+    allCharacters.emplace_back(monsterTexture_1 , font, "Nosferatu", "A fat and slow demon,\npossessing immense strength and health.\nIf not killed,\nit will pursue you for\nthe rest of your life.");
+    allCharacters.emplace_back(monsterTexture_2Flipped , font, "Void", "An extremely fast creature\nthat destroys everything in its path.\nIt sees nothing in front of itself,\nbut this does not prevent it from\ninjuring the character upon contact\nand leaving two offspring after its death.");
+    allCharacters.emplace_back(monsterTexture_3 , font, "Sol interfectorem", "Sun killer, rising from the ground every few seconds\nand shooting bullets over long distances.\nIt can be visible and invisible,\nand appear at any moment in any place!");
     characters Characters(font, gameState);
     pause Pause(font, gameState);
     Character character(characterTexture, window.getSize(), bulletTexture);
@@ -118,7 +118,7 @@ int main() {
             }
             else if (event.type == Event::MouseButtonPressed && gameState == GameState::GAME) {
                 character.setDestination(window.mapPixelToCoords(Mouse::getPosition(window)));
-            } else if (event.type == Event::KeyPressed) {
+            } else if (event.type == Event::KeyPressed && gameState == GameState::GAME) {
                 if (event.key.code == Keyboard::Space && !swapWeapons && bulletsLeft) {
                     bulletsLeft--;
                     character.shoot(window.mapPixelToCoords(Mouse::getPosition(window)));
