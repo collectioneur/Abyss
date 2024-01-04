@@ -9,7 +9,7 @@ EndScreen::EndScreen(const Font& font, GameState& gameState) : gameState(gameSta
     endscreenbuttons.emplace_back("Exit", font, 50);
     gameOverText.setFont(font);
     gameOverText.setString("Game Over");
-    gameOverText.setCharacterSize(100); // Розмір шрифту
+    gameOverText.setCharacterSize(100); 
     gameOverText.setFillColor(sf::Color::White);
     gameOverText.setPosition(450, 50);
     float y = 600;
@@ -36,7 +36,7 @@ void EndScreen::statistics(int killedDemons, float timeSpent) {
     text += to_string(timeSpent);
     text += " s";
     statisticsText.setString(text);
-    statisticsText.setPosition(600, 300);
+    statisticsText.setPosition(400, 300);
 }
 void EndScreen::update(const Vector2f& mousePos, const Event& event) {
     for (auto& button : endscreenbuttons) {
